@@ -1,17 +1,67 @@
+import re
+import json
 from youtube_transcript_api import YouTubeTranscriptApi, NoTranscriptFound
 
-video_id = input("Enter YouTube Video ID ").strip()
+def extract_video_id(url):   # get video id from url
+    if "v=" in url:
+        return url.split("v=")[1].split("&")[0]
+    if "youtu.be/" in url:
+        return url.split("youtu.be/")[1].split("?")[0]
+    return url
 
-try:
-    srt = YouTubeTranscriptApi().fetch(video_id)
-except NoTranscriptFound:
-    print("No transcript found for this video.")
-    exit()
+def clean_text(text):        # cleaning text
+    text = re.sub(r"\s+", " ", text)
+    text = re.sub(r"\s([?.!,])", r"\1", text)
+    return text.strip()
 
-text = "\n".join([line.text for line in srt])
+def main():                  # extracting transcript
+    url = input("Enter YouTube video URL: ").strip()
+    video_id = extract_video_id(url)
 
-filename = f"{video_id}.txt"   #save transcript in name of video ID
-with open(filename, "w", encoding="utf-8") as f:
-    f.write(text)
+    try:
+        api = YouTubeTranscriptApi()
+        transcript_list = api.list(video_id)
 
-print(f"Transcript saved to {filename}")
+        try:                  #language selection
+            transcript = transcript_list.find_manually_created_transcript(["en"])
+        except:
+            try:
+                transcript = transcript_list.find_generated_transcript(["en"])
+            except:
+                try:
+                    transcript = transcript_list.find_generated_transcript(["hi"])
+                except:
+                    print("No transcript found in English or Hindi")
+                    return
+
+        segments = transcript.fetch()
+
+    except NoTranscriptFound:
+        print("No transcript available for this video")
+        return
+
+    raw_data = [                     #saving .json file
+        {
+            "text": seg.text,
+            "start": seg.start,
+            "duration": seg.duration
+        }
+        for seg in segments
+    ]
+
+    with open(f"{video_id}.json", "w", encoding="utf-8") as f:
+        json.dump(raw_data, f, ensure_ascii=False, indent=2)
+
+    texts = [seg.text for seg in segments if seg.text.strip() != ""]     #saving .txt file
+    merged_text = " ".join(texts)
+    cleaned_text = clean_text(merged_text)
+
+    if cleaned_text:
+        with open(f"{video_id}.txt", "w", encoding="utf-8") as f:
+            f.write(cleaned_text)
+        print("Saved .txt and .json files")
+    else:
+        print("Transcript fetched but cleaning is not done")
+
+if __name__ == "__main__":    # run
+    main()
