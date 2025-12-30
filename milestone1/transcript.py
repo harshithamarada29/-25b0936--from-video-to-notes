@@ -2,19 +2,19 @@ import re
 import json
 from youtube_transcript_api import YouTubeTranscriptApi, NoTranscriptFound
 
-def extract_video_id(url):   # get video id from url
+def extract_video_id(url):              #get video_id from url
     if "v=" in url:
         return url.split("v=")[1].split("&")[0]
     if "youtu.be/" in url:
         return url.split("youtu.be/")[1].split("?")[0]
     return url
 
-def clean_text(text):        # cleaning text
+def clean_text(text):                    #removing multiple spaces 
     text = re.sub(r"\s+", " ", text)
     text = re.sub(r"\s([?.!,])", r"\1", text)
     return text.strip()
 
-def main():                  # extracting transcript
+def main():
     url = input("Enter YouTube video URL: ").strip()
     video_id = extract_video_id(url)
 
@@ -22,25 +22,26 @@ def main():                  # extracting transcript
         api = YouTubeTranscriptApi()
         transcript_list = api.list(video_id)
 
-        try:                  #language selection
-            transcript = transcript_list.find_manually_created_transcript(["en"])
-        except:
-            try:
-                transcript = transcript_list.find_generated_transcript(["en"])
-            except:
-                try:
-                    transcript = transcript_list.find_generated_transcript(["hi"])
-                except:
-                    print("No transcript found in English or Hindi")
-                    return
+        print("\nAvailable transcript languages:\n")   #print all available languages
+
+        available = []
+        i = 0
+        for t in transcript_list:
+            kind = "Auto" if t.is_generated else "Manual"
+            print(f"{i}. {t.language} ({t.language_code}) - {kind}")
+            available.append(t)
+            i += 1
+
+        choice = int(input("\nSelect language number: ")) #select the language in which you want transcript
+        transcript = available[choice]
 
         segments = transcript.fetch()
 
-    except NoTranscriptFound:
-        print("No transcript available for this video")
+    except (NoTranscriptFound, IndexError, ValueError):   
+        print("Invalid selection or no transcript available")
         return
 
-    raw_data = [                     #saving .json file
+    raw_data = [                           #saving .json file
         {
             "text": seg.text,
             "start": seg.start,
@@ -52,7 +53,7 @@ def main():                  # extracting transcript
     with open(f"{video_id}.json", "w", encoding="utf-8") as f:
         json.dump(raw_data, f, ensure_ascii=False, indent=2)
 
-    texts = [seg.text for seg in segments if seg.text.strip() != ""]     #saving .txt file
+    texts = [seg.text for seg in segments if seg.text.strip()]  #saving .txt file
     merged_text = " ".join(texts)
     cleaned_text = clean_text(merged_text)
 
@@ -63,5 +64,5 @@ def main():                  # extracting transcript
     else:
         print("Transcript fetched but cleaning is not done")
 
-if __name__ == "__main__":    # run
+if __name__ == "__main__":
     main()
