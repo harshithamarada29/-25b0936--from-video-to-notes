@@ -64,5 +64,5 @@ def main():
     else:
         print("Transcript fetched but cleaning is not done")
 
-if __name__ == "__main__":
+if __name__ == "__main__":     #run
     main()
