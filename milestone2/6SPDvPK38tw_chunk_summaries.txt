@@ -1,0 +1,51 @@
+--- Chunk 1 Summary ---
+Debbie 20: Python likes error but then if you talk about this error we have three types of errors in general. The first one is compile-time error the second one is a logical error and the third one is the runtime error. Let's say your code is working so there is nothing wrong with the syntax everything is working but then when I user says hey I want to add two numbers two plus three and the other four two and three is fine right but let's say if I uses getting fu getting fu is not fine. Debbie 20: Let's continue this series on Python the till is fine.
+
+--- Chunk 2 Summary ---
+When a user says 2+2 it is giving you food sometimes you know if I user might give you a wrong input example let's say if you are going to divide two numbers 5/6 okay so both the values are coming from a user right. If I user says 6 + 2 it works right it will give you 3 if I use a size 10 and 5 you know it is 2 again. But then what if a user say 6 + 0 you cannot divide a number by 0 right and that's where it will given you an error.
+
+--- Chunk 3 Summary ---
+This is not a logical error because for normal execution it works. This is a runtime error because you are getting error at runtime. logical errors are again is it to handle because as it will probably also test the application right all we have a specific testing team for that so we do test this software for different bugs so logical and just normally comes in the bugs as well what about runtime error? The mistake is not done by you the mistake is done by the user right so if you are saying hey user 82 values and in your mind you have that a user will not enter zero value for the second one but user is doing that.
+
+--- Chunk 4 Summary ---
+"As a developer you have to take care of all those things" "If you are using an application which interacts with this server and maybe there is no internet then what will happen your software should not get stopped they're going to get runtime error your execution stops" "That's an issue banking software so that's saying we have millions of transaction on the server and there's only one runtime error because of which your software will stop working and you will lose billions of dollars" "You have to also understand what mistakes our user can do maybe not exactly a user but maybe there might be a sugar the database connection"
+
+--- Chunk 5 Summary ---
+Even if you are getting the exception even if you're getting the error your execution should not stop that's our main logic here. ntime error because of which your software will stop working and you will lose billions of dollars so the important point is even if we are getting an exception our execution should still continue. Let's try an example here what I will do is I will try to use two variables here I will say a is equal to 5 and B isequal to 2 and of course if we divide this 2 numbers it will work let's try to print a divided by B.
+
+--- Chunk 6 Summary ---
+"What if if if I change the value of B to 0 C of course we know that is not possible you're going to divide a number by zero the moment you do that you will get an error and of course the error it says there was a trace back and then it was line number six okay that's right like number six we got the error. It will also print this statement which is giving you the data and it also shows whatever it is and it is zero division error so this is your message division by zero not possible right so how do we solve this?"
+
+--- Chunk 7 Summary ---
+Python has a special thing called as dry so what we are saying hey this line of code this is a critical statement and not sure if this code will work or not so try to execute that okay. Python will say okay since you are writing this in a try block I will try to execution but what if there's an error then you will say oh okay if there is an error it's very simple I will accept the error okay I will handle it as a programmer and the way you do that is by letting exception so you have to say accept exception now the exception so the moment you get an edit this line this will give you the error.
+
+--- Chunk 8 Summary ---
+The moment you get an edit this line this will give you the error and this is where you will handle it now what type of hand thing we want here how can you can do anything you want example so if you know that it is because of a divided by B you can simply say hey you cannot divide a number by 0 and trust me this message is much better than the error which we are showing before right so now if a user is giving you the value which is 0 for the second value you will print a message by saying hey you can't print any message you want.
+
+--- Chunk 9 Summary ---
+So what we are doing is we are trying to execute this statement if this works we'll print it otherwise we will print the except block. What you can do is here you can say exception as E so that you can represent that exception object in some way so this e is just a representation or the object of exception and here I will try to print e as well just to see what is happening inside E and I will go back to my value to zero let's run it again.  by as well so this works right so what will happen you got the values which is five and two you're saying hey try to divide these two numbers you are saying 5 divided by 2.
+
+--- Chunk 10 Summary ---
+Let's run this code and you can see it is printing the message the message which we have plus it is also printing the exception message which is division by zero. the object of exception and here I will try to print e as well just to see what is happening inside E and I will go back to my value to zero okay so that's how it works that'sHow you can handle exception ah one more thing to talk about let's say I'm not printing by here what if I have a special thing I'm opening a file example you know it is always a good practice when you work with files when you open a file you should be closing that file.
+
+--- Chunk 11 Summary ---
+The message is not important what is important is we are reading to some statements so that we can close the resource since we don't have any source as of now I would simply go with print statement. The thing is the moment you get the exception at this line you are getting exception right it is jumping outside this statement it's jumping outside try is going to accept log so that means issue of typing it here whi. pen as a resource always close it hold on let's say if I open are the source inside a try block so let's says if I'm opening up failure if I opening a database connection here where should we close it.
+
+--- Chunk 12 Summary ---
+Python provides you one more feature of it spoiled finally notice finally means you can put your statements and finally so finally simply means it doesn't matter if you are getting the exception or not I will execute so accept block will be executed only when there's an error finally we can execute. If you concentrate you can see it is not saying it's just closed because you will not be executing the exit block if you don't have the error so we have problem so should I put resource close both the side in try and accept and accept as well?
+
+--- Chunk 13 Summary ---
+The accept block will be executed only when there's an error finally we can execute that doesn't matter if you're getting the exception or not beauty right and that's how you work with try accept. Remember when you work on a statement your statements might give you some exceptions so try to handle them with the help of try accept and finally in fact we can do one more thing here what if if I take a value from the user and let's say we have a variable K and the value from a user I'm taking with help of input and the type of input I want is of course integer.
+
+--- Chunk 14 Summary ---
+The error name is value error so for different type of errors we have a different names as well and the jungle one is exceptions so exception will be on top so even if you say zero division error it's a part of exception value. So exception can't handle everything but you can be specific what you can say hey I want to say you cannot even a number by zero when there is azero division error so only when there's an error of zero divisionerror you'll trenders example you know when we ask sake when you are  saying resource close let me change the value let's say P now that the issue right.
+
+--- Chunk 15 Summary ---
+Only when there's an error of zero division error you'll trenders example you know when we ask sake when you are not feeling well you will go to opportu good doctor. Same way for different type of errors we have different above except block so you will say except and this time you look off a value error and you'll say again as it doesn't matter it's just a name of the object okay you can print 10 valid and put that's it just a different message. What if there is an error which you don't know about in that case at the end to be on safe side you have accept and say exception now this exception will try to handle all the other errors are not 0 division and value error.
+
+--- Chunk 16 Summary ---
+ Java programmers learn how to deal with different types of adders and errors in Java code. Java is a programming language based on the idea of a doctor. It's something like we have dentist we have gynecologist we have skin doctor and then we have a general doctor. We can handle everything the same way this exception can handle all the exceptions and here you can print something went wrong yeah that's it you canPrint the message you want. Do practice we try and accept like you're coming from Java background we do have this concept in Java as well right.
+
+--- Chunk 17 Summary ---
+Do share this video with your friends it might be helpful for them so let's everyone bye bye. If you have learned something dope you're like button there and do subscribe of other videos and most important do share thisVideo with Your friends. Do you have any questions or comments about the video? Please send them to jennifer.smith@mailonline.co.uk and we'll feature them in our next video. Do share this Video with Your Friends by clicking on the button below. Do Share This Video With Your Friends By clicking the button above, you'll be shown a video of your choice.
+
