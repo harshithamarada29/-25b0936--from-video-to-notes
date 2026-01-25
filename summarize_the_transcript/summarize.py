@@ -1,6 +1,8 @@
 from transformers import pipeline
 import os
+import re
 from langdetect import detect
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 english_summarizer = pipeline(                             #loading bart model
     "summarization",
@@ -92,7 +94,9 @@ if __name__ == "__main__":                                #main func
 
     chunks = chunk_text(long_text)
     final_summarize(chunks, base_name)
+    
                        #summarization code for streamlit#
+
 def summarize_text(text):
     chunks = chunk_text(text)
 
@@ -100,10 +104,32 @@ def summarize_text(text):
     for chunk in chunks:
         s = summarize_chunk(chunk)
         chunk_summaries.append(s)
+    merged = " ".join(chunk_summaries)
 
-    merged = " ".join(chunk_summaries)                         
-    limit = min(len(merged), 4000)     #dynamic limit
+    final_chunks = chunk_text(
+        merged,
+        chunk_size=1000,   # safe size
+        overlap=120
+    )
 
-    final_summary = summarize_chunk(merged[:limit])
+    final_summaries = []
+    for fc in final_chunks:
+        fs = summarize_chunk(fc)
+        final_summaries.append(fs)
+
+    final_summary = " ".join(final_summaries)
 
     return chunk_summaries, final_summary
+
+def generate_bullet_points(summary, max_points=8):
+    sentences = re.split(r'(?<=[.!?])\s+', summary)
+    bullets = [s.strip() for s in sentences if len(s.strip()) > 40]
+    return bullets[:max_points]
+
+def extract_keywords(text, top_k=10):
+    vectorizer = TfidfVectorizer(
+        stop_words="english",
+        max_features=top_k
+    )
+    vectorizer.fit([text])
+    return vectorizer.get_feature_names_out()
