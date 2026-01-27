@@ -87,6 +87,7 @@ if st.session_state.languages:
 
             else:
                 # -------- NLP MODE -------- #
+                st.success("Transcript extracted successfully")
                 status.write("Generating notes using NLP models...")
 
                 chunk_summaries, final_summary = summarize_text(transcript_text)
@@ -101,6 +102,7 @@ if st.session_state.languages:
                 }
 
                 # -------- GEMINI MODE -------- #
+                st.success("Generated notes using NLP models successfully")
                 status.write("Generating notes using Gemini AI...")
 
                 try:
@@ -164,9 +166,8 @@ Transcript:
                         "bullets": gem_bullets,
                         "keywords": gem_keywords
                     }
-
+                    st.success("Generated notes using GEMINI AI successfully")
                     status.update(label="Notes generated successfully", state="complete")
-                    st.toast("Your notes are ready 🧠")
                     st.snow()
 
                 except Exception as e:
