@@ -171,7 +171,7 @@ Transcript:
 
                 except Exception as e:
                     st.session_state.error = str(e)
-                    status.update(label="Gemini processing failed", state="error")
+                    status.update(label="Gemini processing failed..Your token limit might be exceeded..Please visit after some time..!", state="error")
 
 # ERROR #
 if st.session_state.error:
@@ -200,21 +200,41 @@ if st.session_state.nlp_results:
                 with st.expander(f"Chunk {i}"):
                     st.write(chunk)
 
+        st.download_button(
+            "Download Chunk Summaries",
+            "\n\n".join(
+                [f"Chunk {i+1}\n{c}" for i, c in enumerate(nlp["chunks"])]
+            ),
+            file_name="nlp_chunk_summaries.txt"
+        )
+
         with tab2:
             st.write(nlp["summary"])
+
+        st.download_button(
+            "Download Final summary",
+            nlp["summary"],
+            file_name="nlp_final_summary.txt"
+        )
 
         with tab3:
             for b in nlp["bullets"]:
                 st.write("•", b)
+
+        st.download_button(
+            "Download Bullet Points",
+            "\n".join(nlp["bullets"]),
+            file_name="nlp_bullet_points.txt"
+        )
 
         with tab4:
             for k in nlp["keywords"]:
                 st.write("•", k)
 
         st.download_button(
-            "Download NLP Notes",
-            nlp["summary"],
-            file_name="nlp_notes.txt"
+            "Download Keywords",
+            "\n".join(nlp["keywords"]),
+            file_name="nlp_keywords.txt"
         )
 
     # ---------- GEMINI VIEW ---------- #
@@ -230,16 +250,28 @@ if st.session_state.nlp_results:
             with tab1:
                 st.markdown(gem["summary"])   # markdown for topic headings
 
+            st.download_button(
+                "Download Summary",
+                gem["summary"],
+                file_name="gemini_summary.txt"
+            )
+
             with tab2:
                 st.write(gem["bullets"])
+
+            st.download_button(
+                "Download Bullet points",
+                gem["bullets"],
+                file_name="gemini_bullets.txt"
+            )
 
             with tab3:
                 st.write(gem["keywords"])
 
             st.download_button(
-                "Download Gemini Notes",
-                gem["summary"],
-                file_name="gemini_notes.txt"
+                "Download Keywords",
+                gem["keywords"],
+                file_name="gemini_keywords.txt"
             )
 
         else:
