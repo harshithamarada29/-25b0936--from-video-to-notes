@@ -52,19 +52,28 @@ It automates the process of watching long lectures by extracting transcripts and
   - Generate notes with a single click
 
 ### Features
--> Displays results in **four organized tabs**:
+-> Displays results in **four organized tabs** using NLP models:
   1. Chunk-wise Summaries
   2. Final Summary
   3. Bullet Points
   4. Keywords
-     
--> Bullet points are generated using rule-based sentence segmentation
 
--> Keywords are extracted using **TF-IDF (classical NLP technique)**
+->Displays results in **three organized tabs** using Gemini AI:
+  1. Final Summary
+  2. Bullet Points
+  3. Keywords
+     
+-> Bullet points are generated using Gemini AI and rule-based sentence segmentation
+
+-> Keywords are extracted using Gemini AI and **TF-IDF (classical NLP technique)**
 
 -> Download options for:
-  - Chunk summaries
-  - Final summary
+  - Notes using NLP models
+  - Notes using Gemini AI
+
+IMP NOTE: The user have to create a .env file in the root directory of the project. And mention GOOGLE_API_KEY="your google api key" in the .env file
+
+-> This project uses Gemini 2.5 Flash to generate summary, bullet points and keywords
 
 ---
 
@@ -81,7 +90,7 @@ It automates the process of watching long lectures by extracting transcripts and
 - **Models:**
   - BART (English summarization)
   - mT5 (Multilingual summarization)
-
+  - Gemini AI (for enhanced notes)
 ---
 
 ## Project Structure
