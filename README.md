@@ -71,7 +71,7 @@ It automates the process of watching long lectures by extracting transcripts and
   - Notes using NLP models
   - Notes using Gemini AI
 
-IMP NOTE: The user have to create a .env file in the root directory of the project. And mention GOOGLE_API_KEY="your google api key" in the .env file
+`IMP NOTE: The user have to create a .env file in the root directory of the project. And mention GOOGLE_API_KEY="your google api key" in the .env file and save it.This is essestinal to get enhanced Gemini AI summary, keywords and some bullet points.`
 
 -> This project uses Gemini 2.5 Flash to generate summary, bullet points and keywords
 
